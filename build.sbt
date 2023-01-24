@@ -7,9 +7,10 @@ lazy val root = (project in file("."))
   }
 
 libraryDependencies ++= Seq(
-  "dev.zio" %% "zio" % "2.0.6",
+  "dev.zio" %% "zio"         % "2.0.6",
   "dev.zio" %% "zio-streams" % "2.0.6",
-  "dev.zio" %% "zio-json" % "0.4.2",
-  "dev.zio" %% "zio-http" % "0.0.3"
+  "dev.zio" %% "zio-json"    % "0.4.2",
+  "dev.zio" %% "zio-http"    % "0.0.3"
 )
 
+libraryDependencies += "com.github.pureconfig" %% "pureconfig-core" % "0.17.2"
