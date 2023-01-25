@@ -6,21 +6,8 @@ import zio.ZIO
 
 import scala.concurrent.{ExecutionContext, Future}
 
-trait Service[F[_], T]
-
-trait ServiceCanRead[F[_], T] extends Service[F, T]:
-  def list: F[Seq[T]]
-  def find(f: T => Boolean): F[Option[T]]
-
-trait ServiceCanWrite[F[_], T] extends Service[F, T]:
-  def put(value: T)(f: T => Boolean): F[Boolean]
-  def delete(f: T => Boolean): F[Boolean]
-
-type ServiceResult[T] = ZIO[Any, Throwable, T]
-
 final case class PeopleService(private val repo: PersonRepository):
-  def getAll: ServiceResult[Seq[Person]] = repo.getPeople
+  def getAll: ZIO[Any, Throwable, Seq[Person]] = repo.getPeople
 
-  def getById(id: Int): ServiceResult[Option[Person]] = repo.getPersonById(id)
-
+  def getById(id: Int): ZIO[Any, Throwable, Option[Person]] = repo.getPersonById(id)
 end PeopleService
