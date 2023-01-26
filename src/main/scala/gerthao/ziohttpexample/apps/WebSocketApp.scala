@@ -8,7 +8,7 @@ import zio.http.socket.{WebSocketChannelEvent, WebSocketFrame}
 
 object WebSocketApp:
 
-  val app = Http.collectZIO[WebSocketChannelEvent] {
+  val app: Http[Any, Throwable, WebSocketChannelEvent, Unit] = Http.collectZIO[WebSocketChannelEvent] {
     case ChannelEvent(channel, ChannelRead(WebSocketFrame.Text(message))) =>
       channel.writeAndFlush(WebSocketFrame.text(message.toUpperCase))
     case ChannelEvent(channel, UserEventTriggered(event)) => event match {
