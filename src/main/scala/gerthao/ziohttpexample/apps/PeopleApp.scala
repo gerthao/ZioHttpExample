@@ -15,8 +15,7 @@ final class PeopleApp(peopleService: PeopleService) {
 
   val app: Http[Any, Nothing, Request, Response] = Http.collectZIO[Request] {
     case r @ Method.GET -> base /: "id" /: id => handleGetPerson(r)
-    case Method.GET -> base                   =>
-      peopleService.getAll.fold(
+    case Method.GET -> base                   => peopleService.getAll.fold(
         err => Response.text(err.toString),
         data => Response.json(data.toJsonPretty)
       )
@@ -31,4 +30,5 @@ final class PeopleApp(peopleService: PeopleService) {
       err => Response.text(err.toString),
       data => Response.json(data.toJsonPretty)
     )
+
 }

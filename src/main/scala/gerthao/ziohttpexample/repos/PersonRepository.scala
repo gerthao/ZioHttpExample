@@ -34,7 +34,9 @@ object PersonRepository:
   def getPeople: ZIO[PersonRepository, SQLException, Seq[Person]] =
     ZIO.serviceWithZIO[PersonRepository](_.getPeople)
 
-  def getPersonById(id: Int): ZIO[PersonRepository, SQLException, Option[Person]] =
+  def getPersonById(
+      id: Int
+  ): ZIO[PersonRepository, SQLException, Option[Person]] =
     ZIO.serviceWithZIO[PersonRepository](_.getPersonById(id))
 
   def getPeopleByFullName(

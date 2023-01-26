@@ -9,5 +9,7 @@ import scala.concurrent.{ExecutionContext, Future}
 final case class PeopleService(private val repo: PersonRepository):
   def getAll: ZIO[Any, Throwable, Seq[Person]] = repo.getPeople
 
-  def getById(id: Int): ZIO[Any, Throwable, Option[Person]] = repo.getPersonById(id)
+  def getById(id: Int): ZIO[Any, Throwable, Option[Person]] =
+    repo.getPersonById(id)
+
 end PeopleService
